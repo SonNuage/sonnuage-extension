@@ -1,10 +1,10 @@
-// Menu de l'icône Localify : instance cible, actions pour l'onglet YouTube actif, envoi des cookies.
+// Menu de l'icône SonNuage : instance cible, actions pour l'onglet YouTube actif, envoi des cookies.
 // Toutes les requêtes passent par le service worker (background.js) ; ce script ne fait que l'affichage.
 
 const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
 const $ = (id) => document.getElementById(id);
 const locale = chrome.i18n.getUILanguage();
-const COOKIE_ALARM = "localify-cookies"; // même nom que dans background.js
+const COOKIE_ALARM = "sonnuage-cookies"; // même nom que dans background.js
 const PENDING = ["Queued", "Downloading", "Processing"];
 const STATE_CHIPS = {
   Queued: ["stateQueued", "warn"],
@@ -17,7 +17,7 @@ const STATE_CHIPS = {
 
 let servers = [];
 let serverId = null;
-let page = null; // résultat de LocalifyPage.parse pour l'onglet actif
+let page = null; // résultat de SonNuagePage.parse pour l'onglet actif
 let tabInfo = {}; // titre, chaîne lus dans la page (facultatif)
 let generation = 0; // change avec l'instance choisie : les réponses d'avant sont ignorées
 let pollTimer = null;
@@ -404,7 +404,7 @@ function selectServer(id) {
 async function init() {
   document.documentElement.lang = locale;
   translate(document);
-  $("version").textContent = `Localify ${chrome.runtime.getManifest().version}`;
+  $("version").textContent = `SonNuage ${chrome.runtime.getManifest().version}`;
   $("settings").addEventListener("click", openOptions);
   $("footerSettings").addEventListener("click", openOptions);
   $("configure").addEventListener("click", openOptions);
@@ -426,13 +426,13 @@ async function init() {
   $("server").hidden = false;
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  page = LocalifyPage.parse(tab?.url ?? "");
+  page = SonNuagePage.parse(tab?.url ?? "");
   if (page?.video) {
     tabInfo = await readTab(tab, page.video);
     tabInfo.title ||= tab.title?.replace(/^\(\d+\)\s*/, "").replace(/\s+-\s+YouTube( Music)?$/, "").trim() || null;
     // Page de vidéo : on propose aussi sa chaîne si la page la donne.
     if (!page.channel && tabInfo.channelHref) {
-      const channel = LocalifyPage.channelOf(tabInfo.channelHref);
+      const channel = SonNuagePage.channelOf(tabInfo.channelHref);
       if (channel) page.channel = { ...channel, name: tabInfo.channelName };
     }
   }

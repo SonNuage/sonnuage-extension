@@ -1,6 +1,6 @@
-# Localify — extension de navigateur
+# SonNuage — extension de navigateur
 
-Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [Localify](https://git.pmjb.org/pmj.bailly/localify). Un clic sur
+Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [SonNuage](https://git.pmjb.org/pmj.bailly/sonnuage). Un clic sur
 son icône, dans la barre d'outils, ouvre un menu qui agit sur l'onglet YouTube / YouTube Music affiché, sans rien
 ajouter dans les pages de YouTube :
 
@@ -18,14 +18,14 @@ Le menu affiche aussi l'instance visée et son état (*Connecté*, *Injoignable*
 cookies (« envoyés il y a … · prochain envoi dans … », bouton *Envoyer les cookies maintenant*) et un lien vers les
 réglages. Permissions : `storage`, `alarms` (envoi périodique des cookies), `activeTab` (lire l'adresse de
 l'onglet au clic sur l'icône), `scripting` (lire le titre et la chaîne de la vidéo dans la page YouTube), accès à
-www / music / m.youtube.com ; `cookies` et l'accès à chaque serveur Localify sont demandés à la configuration.
+www / music / m.youtube.com ; `cookies` et l'accès à chaque serveur SonNuage sont demandés à la configuration.
 
-1. Dans Localify : *Administration → YouTube → Réglages → Extension de navigateur*, créer une clé et la copier
+1. Dans SonNuage : *Administration → YouTube → Réglages → Extension de navigateur*, créer une clé et la copier
    (elle n'est affichée qu'une fois ; seule son empreinte est conservée). La clé ne permet que quatre actions :
    ajouter des vidéos à la file, lire une adresse YouTube, s'abonner, envoyer des cookies YouTube ; plus
    l'état d'une vidéo. Rien d'autre de l'API n'est accessible avec elle. Révoquez-la depuis le même écran.
 2. Charger l'extension non empaquetée, depuis ce dépôt ou depuis le zip produit par la CI
-   (`localify-extension-X.Y.Z.zip`, artefact du job `package` ou paquet de la release) :
+   (`sonnuage-extension-X.Y.Z.zip`, artefact du job `package` ou paquet de la release) :
    - **Chrome / Edge** : `chrome://extensions` → activer le *mode développeur* → *Charger l'extension non
      empaquetée* → choisir le dossier de ce dépôt (ou du zip décompressé).
    - **Firefox** : `about:debugging#/runtime/this-firefox` → *Charger un module complémentaire temporaire* →
@@ -34,7 +34,7 @@ www / music / m.youtube.com ; `cookies` et l'accès à chaque serveur Localify s
    `https://musique.exemple.fr`, ou `http://localhost:5080` en développement) et la clé, puis
    *Enregistrer et tester* : le navigateur demande l'accès à ce seul serveur.
 
-**Plusieurs instances** : *Ajouter une instance* enregistre d'autres serveurs Localify (chacun avec sa propre
+**Plusieurs instances** : *Ajouter une instance* enregistre d'autres serveurs SonNuage (chacun avec sa propre
 clé). Le menu de l'extension vise l'instance cochée *Instance par défaut* ; une liste déroulante y permet d'en
 choisir une autre le temps d'une action.
 
@@ -58,6 +58,6 @@ service) pour les chemins `/api/admin/youtube/*` et `/api/extension/*`.
 
 Pas d'étape de build : les fichiers à la racine sont l'extension. [.gitlab-ci.yml](.gitlab-ci.yml) vérifie la
 syntaxe des scripts et des JSON, contrôle que les clés de traduction sont les mêmes dans toutes les langues, puis
-produit `dist/localify-extension-X.Y.Z.zip` (version lue dans `manifest.json`). Sur un tag `vX.Y.Z` (qui doit
+produit `dist/sonnuage-extension-X.Y.Z.zip` (version lue dans `manifest.json`). Sur un tag `vX.Y.Z` (qui doit
 correspondre à la version du manifeste), le zip va dans le registre de paquets génériques et une release GitLab
 est créée.

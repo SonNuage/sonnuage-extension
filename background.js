@@ -1,16 +1,16 @@
-// Localify : toutes les requêtes vers les serveurs partent d'ici (menu de l'icône et page d'options passent par des messages).
+// SonNuage : toutes les requêtes vers les serveurs partent d'ici (menu de l'icône et page d'options passent par des messages).
 // Une clé d'extension n'ouvre que : POST /imports, GET /resolve, POST /subscriptions, PUT /cookies et GET /api/extension/status.
 //
 // Stockage local :
-//   servers         [{ id, name, url, apiKey, sendCookies }]  instances Localify
+//   servers         [{ id, name, url, apiKey, sendCookies }]  instances SonNuage
 //   defaultServerId instance choisie par défaut dans le menu de l'extension
 //   cookieHours     intervalle d'envoi automatique des cookies
 //   cookieState     { [id]: { at, error } } dernier envoi par instance (séparé de servers : écrit ici, lu par les options)
 
-const COOKIE_ALARM = "localify-cookies";
+const COOKIE_ALARM = "sonnuage-cookies";
 const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
 
-class LocalifyError extends Error {
+class SonNuageError extends Error {
   constructor(message, status = 0, code = null) {
     super(message);
     this.status = status;
@@ -40,7 +40,7 @@ async function settings() {
 async function server(id) {
   const s = await settings();
   const found = s.servers.find((x) => x.id === (id ?? s.defaultServerId)) ?? (id ? null : s.servers[0]);
-  if (!found) throw new LocalifyError(t("errNotConfigured"), 0, "notConfigured");
+  if (!found) throw new SonNuageError(t("errNotConfigured"), 0, "notConfigured");
   return found;
 }
 
@@ -55,7 +55,7 @@ async function call(target, method, path, body) {
       cache: "no-store",
     });
   } catch {
-    throw new LocalifyError(t("errUnreachable", target.name), 0, "unreachable");
+    throw new SonNuageError(t("errUnreachable", target.name), 0, "unreachable");
   }
   if (response.ok) {
     const text = await response.text();
@@ -74,7 +74,7 @@ async function call(target, method, path, body) {
     : detail ? t("errServerDetail", target.name, detail)
     : s === 403 ? t("errForbidden", target.name)
     : t("errServer", target.name, s);
-  throw new LocalifyError(message, s);
+  throw new SonNuageError(message, s);
 }
 
 const q = (params) => new URLSearchParams(Object.entries(params).filter(([, v]) => v != null)).toString();
@@ -105,11 +105,11 @@ async function importList({ serverId, url, isAlbum }) {
 // ---------- Cookies (facultatif, désactivé par défaut, par instance) ----------
 
 async function cookiesText() {
-  if (!(await chrome.permissions.contains({ permissions: ["cookies"] }))) throw new LocalifyError(t("errCookiePermission"));
+  if (!(await chrome.permissions.contains({ permissions: ["cookies"] }))) throw new SonNuageError(t("errCookiePermission"));
   const all = [];
   for (const domain of ["youtube.com", "google.com"]) all.push(...(await chrome.cookies.getAll({ domain })));
-  if (!all.some((c) => c.domain.endsWith("youtube.com"))) throw new LocalifyError(t("errNoYoutubeCookies"));
-  const lines = ["# Netscape HTTP Cookie File", "# Localify browser extension", ""];
+  if (!all.some((c) => c.domain.endsWith("youtube.com"))) throw new SonNuageError(t("errNoYoutubeCookies"));
+  const lines = ["# Netscape HTTP Cookie File", "# SonNuage browser extension", ""];
   for (const c of all) {
     const domain = (c.httpOnly ? "#HttpOnly_" : "") + (c.hostOnly ? c.domain.replace(/^\./, "") : c.domain.startsWith(".") ? c.domain : "." + c.domain);
     const expiry = c.session || !c.expirationDate ? 0 : Math.floor(c.expirationDate);
@@ -127,7 +127,7 @@ async function recordCookieState(id, state) {
 async function uploadCookies({ serverId } = {}) {
   const s = await settings();
   const targets = serverId ? s.servers.filter((x) => x.id === serverId) : s.servers.filter((x) => x.sendCookies);
-  if (!targets.length) throw new LocalifyError(t("errNotConfigured"), 0, "notConfigured");
+  if (!targets.length) throw new SonNuageError(t("errNotConfigured"), 0, "notConfigured");
   let content;
   try {
     content = await cookiesText();
@@ -145,7 +145,7 @@ async function uploadCookies({ serverId } = {}) {
       errors.push(e.message);
     }
   }
-  if (errors.length) throw new LocalifyError(errors.join("\n"));
+  if (errors.length) throw new SonNuageError(errors.join("\n"));
 }
 
 async function scheduleCookies() {

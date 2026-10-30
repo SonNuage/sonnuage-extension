@@ -1,14 +1,14 @@
 {
   "extName": {
-    "message": "Localify",
+    "message": "SonNuage",
     "description": "Extension name (store, extensions page)."
   },
   "extDescription": {
-    "message": "Ajoute à votre serveur Localify la vidéo, la playlist ou la chaîne YouTube ouverte.",
+    "message": "Ajoute à votre serveur SonNuage la vidéo, la playlist ou la chaîne YouTube ouverte.",
     "description": "Extension description (store, extensions page)."
   },
   "actionTitle": {
-    "message": "Localify",
+    "message": "SonNuage",
     "description": "Tooltip of the toolbar icon, which opens the extension menu."
   },
   "msgFailed": {
@@ -51,7 +51,7 @@
   },
   "errNotConfigured": {
     "message": "Extension non configurée : renseignez l'adresse du serveur et la clé.",
-    "description": "Error: no Localify instance with an address and a key."
+    "description": "Error: no SonNuage instance with an address and a key."
   },
   "errUnreachable": {
     "message": "$NAME$ : serveur injoignable.",
@@ -124,20 +124,20 @@
     "description": "Error: the browser has no youtube.com cookie."
   },
   "optionsTitle": {
-    "message": "Localify – réglages de l'extension",
+    "message": "SonNuage – réglages de l'extension",
     "description": "Title of the settings page."
   },
   "optionsIntro": {
-    "message": "Ajoute à vos serveurs Localify la vidéo, la playlist ou la chaîne ouverte sur YouTube ou YouTube Music.",
+    "message": "Ajoute à vos serveurs SonNuage la vidéo, la playlist ou la chaîne ouverte sur YouTube ou YouTube Music.",
     "description": "Introduction on the settings page."
   },
   "instancesHeading": {
-    "message": "Instances Localify",
+    "message": "Instances SonNuage",
     "description": "Heading of the list of servers."
   },
   "instancesHelp": {
-    "message": "Créez une clé dans Localify : Administration → YouTube → Réglages → Extension de navigateur. Elle permet seulement d'ajouter des imports et des abonnements YouTube, et d'envoyer des cookies.",
-    "description": "Where to create a key. The path names the Localify admin UI, which is in French: keep the French labels."
+    "message": "Créez une clé dans SonNuage : Administration → YouTube → Réglages → Extension de navigateur. Elle permet seulement d'ajouter des imports et des abonnements YouTube, et d'envoyer des cookies.",
+    "description": "Where to create a key. The path names the SonNuage admin UI, which is in French: keep the French labels."
   },
   "instanceNew": {
     "message": "Nouvelle instance",
@@ -181,7 +181,7 @@
   },
   "btnAddInstance": {
     "message": "Ajouter une instance",
-    "description": "Button: add another Localify server."
+    "description": "Button: add another SonNuage server."
   },
   "confirmRemove": {
     "message": "Retirer « $NAME$ » de l'extension ? La clé reste valable sur le serveur tant qu'elle n'y est pas révoquée.",
@@ -250,7 +250,7 @@
     "description": "Why cookies may be needed."
   },
   "cookiesPoint1": {
-    "message": "Seuls les cookies youtube.com et google.com de ce navigateur sont lus, au format Netscape (cookies.txt), puis envoyés aux instances Localify cochées et nulle part ailleurs.",
+    "message": "Seuls les cookies youtube.com et google.com de ce navigateur sont lus, au format Netscape (cookies.txt), puis envoyés aux instances SonNuage cochées et nulle part ailleurs.",
     "description": "Cookie explanation, item 1."
   },
   "cookiesPoint2": {
@@ -270,7 +270,7 @@
     "description": "Cog button and footer link: open the settings page."
   },
   "popupNoServer": {
-    "message": "Aucun serveur Localify n'est configuré.",
+    "message": "Aucun serveur SonNuage n'est configuré.",
     "description": "Menu message when no instance has an address and a key."
   },
   "popupConfigure": {
@@ -278,7 +278,7 @@
     "description": "Menu button: open the settings to add an instance."
   },
   "popupTargetServer": {
-    "message": "Instance Localify qui reçoit les actions",
+    "message": "Instance SonNuage qui reçoit les actions",
     "description": "Tooltip of the instance selector in the menu."
   },
   "popupCookies": {

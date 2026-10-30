@@ -1,6 +1,6 @@
 // Lecture d'une adresse YouTube / YouTube Music : vidéo, playlist (ou album) et chaîne.
 // Travaille sur une chaîne d'adresse (onglet actif lu par le menu), pas sur `location`.
-// Exposé en global : LocalifyPage.parse(href) → { video, list, channel } ou null hors de YouTube.
+// Exposé en global : SonNuagePage.parse(href) → { video, list, channel } ou null hors de YouTube.
 
 (() => {
   const HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "music.youtube.com", "youtu.be"]);
@@ -67,5 +67,5 @@
     }
   }
 
-  globalThis.LocalifyPage = { parse, channelOf };
+  globalThis.SonNuagePage = { parse, channelOf };
 })();

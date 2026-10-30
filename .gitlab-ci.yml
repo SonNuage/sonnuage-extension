@@ -1,6 +1,6 @@
-# Pipeline de l'extension Localify
+# Pipeline de l'extension SonNuage
 #  - test    : syntaxe JS et JSON, mêmes clés de traduction dans toutes les langues
-#  - package : zip de l'extension en artefact (dist/localify-extension-X.Y.Z.zip, version du manifeste)
+#  - package : zip de l'extension en artefact (dist/sonnuage-extension-X.Y.Z.zip, version du manifeste)
 #  - release : sur tag vX.Y.Z, zip dans le registre de paquets génériques et release GitLab
 
 stages: [test, package, release]
@@ -42,10 +42,10 @@ package:
     - apk add --no-cache zip > /dev/null
     - VERSION=$(node -p 'require("./manifest.json").version')
     - mkdir -p dist
-    - zip -r -X "dist/localify-extension-$VERSION.zip" manifest.json *.js *.html *.css _locales
-    - unzip -l "dist/localify-extension-$VERSION.zip"
+    - zip -r -X "dist/sonnuage-extension-$VERSION.zip" manifest.json *.js *.html *.css _locales
+    - unzip -l "dist/sonnuage-extension-$VERSION.zip"
   artifacts:
-    name: localify-extension
+    name: sonnuage-extension
     paths: [dist/]
     expire_in: 30 days
 
@@ -58,8 +58,8 @@ release:
   script:
     - VERSION="${CI_COMMIT_TAG#v}"
     - apk add --no-cache curl > /dev/null
-    - ZIP_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/localify-extension/${VERSION}/localify-extension-${VERSION}.zip"
-    - 'curl --fail --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file "dist/localify-extension-$VERSION.zip" "$ZIP_URL"'
+    - ZIP_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/sonnuage-extension/${VERSION}/sonnuage-extension-${VERSION}.zip"
+    - 'curl --fail --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file "dist/sonnuage-extension-$VERSION.zip" "$ZIP_URL"'
     - >
-      release-cli create --name "Extension Localify $VERSION" --tag-name "$CI_COMMIT_TAG"
-      --assets-link "{\"name\":\"localify-extension-$VERSION.zip\",\"url\":\"$ZIP_URL\",\"link_type\":\"package\"}"
+      release-cli create --name "Extension SonNuage $VERSION" --tag-name "$CI_COMMIT_TAG"
+      --assets-link "{\"name\":\"sonnuage-extension-$VERSION.zip\",\"url\":\"$ZIP_URL\",\"link_type\":\"package\"}"

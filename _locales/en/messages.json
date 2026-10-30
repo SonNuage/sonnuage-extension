@@ -1,14 +1,14 @@
 {
   "extName": {
-    "message": "Localify",
+    "message": "SonNuage",
     "description": "Extension name (store, extensions page)."
   },
   "extDescription": {
-    "message": "Add the YouTube video, playlist or channel you are viewing to your Localify server.",
+    "message": "Add the YouTube video, playlist or channel you are viewing to your SonNuage server.",
     "description": "Extension description (store, extensions page)."
   },
   "actionTitle": {
-    "message": "Localify",
+    "message": "SonNuage",
     "description": "Tooltip of the toolbar icon, which opens the extension menu."
   },
   "msgFailed": {
@@ -51,7 +51,7 @@
   },
   "errNotConfigured": {
     "message": "Extension not set up: add a server address and a key.",
-    "description": "Error: no Localify instance with an address and a key."
+    "description": "Error: no SonNuage instance with an address and a key."
   },
   "errUnreachable": {
     "message": "$NAME$: server unreachable.",
@@ -124,20 +124,20 @@
     "description": "Error: the browser has no youtube.com cookie."
   },
   "optionsTitle": {
-    "message": "Localify – extension settings",
+    "message": "SonNuage – extension settings",
     "description": "Title of the settings page."
   },
   "optionsIntro": {
-    "message": "Add the YouTube or YouTube Music video, playlist or channel you are viewing to your Localify servers.",
+    "message": "Add the YouTube or YouTube Music video, playlist or channel you are viewing to your SonNuage servers.",
     "description": "Introduction on the settings page."
   },
   "instancesHeading": {
-    "message": "Localify instances",
+    "message": "SonNuage instances",
     "description": "Heading of the list of servers."
   },
   "instancesHelp": {
-    "message": "Create a key in Localify: Administration → YouTube → Réglages → Extension de navigateur. It only allows adding YouTube imports and subscriptions, and sending cookies.",
-    "description": "Where to create a key. The path names the Localify admin UI, which is in French: keep the French labels."
+    "message": "Create a key in SonNuage: Administration → YouTube → Réglages → Extension de navigateur. It only allows adding YouTube imports and subscriptions, and sending cookies.",
+    "description": "Where to create a key. The path names the SonNuage admin UI, which is in French: keep the French labels."
   },
   "instanceNew": {
     "message": "New instance",
@@ -181,7 +181,7 @@
   },
   "btnAddInstance": {
     "message": "Add an instance",
-    "description": "Button: add another Localify server."
+    "description": "Button: add another SonNuage server."
   },
   "confirmRemove": {
     "message": "Remove “$NAME$” from the extension? The key stays valid on the server until it is revoked there.",
@@ -250,7 +250,7 @@
     "description": "Why cookies may be needed."
   },
   "cookiesPoint1": {
-    "message": "Only this browser's youtube.com and google.com cookies are read, in Netscape format (cookies.txt), and sent to the ticked Localify instances and nowhere else.",
+    "message": "Only this browser's youtube.com and google.com cookies are read, in Netscape format (cookies.txt), and sent to the ticked SonNuage instances and nowhere else.",
     "description": "Cookie explanation, item 1."
   },
   "cookiesPoint2": {
@@ -270,7 +270,7 @@
     "description": "Cog button and footer link: open the settings page."
   },
   "popupNoServer": {
-    "message": "No Localify server is set up yet.",
+    "message": "No SonNuage server is set up yet.",
     "description": "Menu message when no instance has an address and a key."
   },
   "popupConfigure": {
@@ -278,7 +278,7 @@
     "description": "Menu button: open the settings to add an instance."
   },
   "popupTargetServer": {
-    "message": "Localify instance that receives the actions",
+    "message": "SonNuage instance that receives the actions",
     "description": "Tooltip of the instance selector in the menu."
   },
   "popupCookies": {
