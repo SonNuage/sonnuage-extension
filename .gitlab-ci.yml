@@ -42,7 +42,7 @@ package:
     - apk add --no-cache zip > /dev/null
     - VERSION=$(node -p 'require("./manifest.json").version')
     - mkdir -p dist
-    - zip -r -X "dist/sonnuage-extension-$VERSION.zip" manifest.json *.js *.html *.css _locales
+    - zip -r -X "dist/sonnuage-extension-$VERSION.zip" manifest.json *.js *.html *.css _locales icons
     - unzip -l "dist/sonnuage-extension-$VERSION.zip"
   artifacts:
     name: sonnuage-extension

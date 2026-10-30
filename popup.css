@@ -6,8 +6,8 @@
   --card: #f2f2f2;
   --line: #0000001a;
   --hover: #0000000d;
-  --accent: #1db954;
-  --accent-fg: #000;
+  --accent: #3346c4;
+  --accent-fg: #fff;
   --secondary: #0000000d;
   --bad: #c62828;
   --bad-bg: #c628281a;
@@ -18,6 +18,8 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
+    --accent: #ffd166;
+    --accent-fg: #141a33;
     --bg: #212121;
     --fg: #f1f1f1;
     --muted: #aaa;
@@ -56,8 +58,6 @@ body {
 .bottom { border-top: 1px solid var(--line); padding: 6px 8px 6px 14px; font-size: 12px; }
 .brand { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
 .logo { width: 22px; height: 22px; }
-.logo circle { fill: var(--accent); }
-.logo path { fill: #000; }
 
 button.icon {
   display: grid;

@@ -3,6 +3,12 @@
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
   "version": "1.2.0",
   "permissions": ["storage", "alarms", "activeTab", "scripting"],
   "optional_permissions": ["cookies"],
@@ -25,7 +31,13 @@
   },
   "action": {
     "default_title": "__MSG_actionTitle__",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
   },
   "browser_specific_settings": {
     "gecko": {
