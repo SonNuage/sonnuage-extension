@@ -81,7 +81,7 @@ const q = (params) => new URLSearchParams(Object.entries(params).filter(([, v]) 
 
 async function importVideo({ serverId, videoId, url, title, channel }) {
   const target = await server(serverId);
-  // yt-dlp donne le titre exact, la durée et la miniature ; à défaut, ce qu'affiche la page.
+  // yt-dlp donne le titre exact, la durée et la miniature. À défaut, ce qu'affiche la page.
   let video = { videoId, title: title || videoId, channel: channel || null, durationSeconds: null, thumbnailUrl: null, importStatus: null };
   try {
     const listing = await call(target, "GET", `/api/admin/youtube/resolve?${q({ url })}`);

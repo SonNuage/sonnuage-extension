@@ -1,5 +1,5 @@
 // Menu de l'icône SonNuage : instance cible, actions pour l'onglet YouTube actif, envoi des cookies.
-// Toutes les requêtes passent par le service worker (background.js) ; ce script ne fait que l'affichage.
+// Toutes les requêtes passent par le service worker (background.js). Ce script ne fait que l'affichage.
 
 const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
 const $ = (id) => document.getElementById(id);

@@ -17,7 +17,7 @@
   },
   "msgFailedReason": {
     "message": "Échec : $REASON$",
-    "description": "Message: the import failed; REASON is the server's error (may be in another language).",
+    "description": "Message: the import failed. REASON is the server's error (may be in another language).",
     "placeholders": {
       "reason": {
         "content": "$1",
@@ -27,7 +27,7 @@
   },
   "msgSubscribing": {
     "message": "Lecture de la liste par le serveur, cela peut prendre un moment.",
-    "description": "Message while subscribing; reading a long playlist takes time."
+    "description": "Message while subscribing. Reading a long playlist takes time."
   },
   "msgSubscribedExisting": {
     "message": "Les vidéos existantes sont ajoutées à la file.",
@@ -55,7 +55,7 @@
   },
   "errUnreachable": {
     "message": "$NAME$ : serveur injoignable.",
-    "description": "Error: network failure; NAME is the instance name.",
+    "description": "Error: network failure. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -65,7 +65,7 @@
   },
   "errKeyRejected": {
     "message": "$NAME$ : clé refusée, elle a peut-être été révoquée.",
-    "description": "Error 401; NAME is the instance name.",
+    "description": "Error 401. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -75,7 +75,7 @@
   },
   "errForbidden": {
     "message": "$NAME$ : accès refusé par le serveur.",
-    "description": "Error 403; NAME is the instance name.",
+    "description": "Error 403. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -89,7 +89,7 @@
   },
   "errServer": {
     "message": "$NAME$ : erreur du serveur ($STATUS$).",
-    "description": "Other HTTP error; NAME is the instance, STATUS the HTTP code.",
+    "description": "Other HTTP error. NAME is the instance, STATUS the HTTP code.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -103,7 +103,7 @@
   },
   "errServerDetail": {
     "message": "$NAME$ : $DETAIL$",
-    "description": "HTTP error with a message from the server (often in French); NAME is the instance.",
+    "description": "HTTP error with a message from the server (often in French). NAME is the instance.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -124,7 +124,7 @@
     "description": "Error: the browser has no youtube.com cookie."
   },
   "optionsTitle": {
-    "message": "SonNuage – réglages de l'extension",
+    "message": "Réglages de l'extension SonNuage",
     "description": "Title of the settings page."
   },
   "optionsIntro": {
@@ -185,7 +185,7 @@
   },
   "confirmRemove": {
     "message": "Retirer « $NAME$ » de l'extension ? La clé reste valable sur le serveur tant qu'elle n'y est pas révoquée.",
-    "description": "Confirmation; NAME is the instance name.",
+    "description": "Confirmation. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -223,7 +223,7 @@
   },
   "cookiesLastSent": {
     "message": "Derniers cookies envoyés le $DATE$.",
-    "description": "Cookie state; DATE is a localized date and time.",
+    "description": "Cookie state. DATE is a localized date and time.",
     "placeholders": {
       "date": {
         "content": "$1",
@@ -233,7 +233,7 @@
   },
   "cookiesLastError": {
     "message": "Dernier envoi en échec : $ERROR$",
-    "description": "Cookie state; ERROR is the error message.",
+    "description": "Cookie state. ERROR is the error message.",
     "placeholders": {
       "error": {
         "content": "$1",
@@ -258,7 +258,7 @@
     "description": "Cookie explanation, item 2 (security warning)."
   },
   "cookiesPoint3": {
-    "message": "Désactivé par défaut. Le navigateur demande la permission « cookies » la première fois ; elle est retirée dès qu'aucune instance ne reçoit plus de cookies.",
+    "message": "Désactivé par défaut. Le navigateur demande la permission « cookies » la première fois. Elle est retirée dès qu'aucune instance ne reçoit plus de cookies.",
     "description": "Cookie explanation, item 3."
   },
   "cookiesInterval": {
@@ -287,7 +287,7 @@
   },
   "popupCookiesSent": {
     "message": "Cookies envoyés $WHEN$",
-    "description": "Cookie state; WHEN is a relative time such as '5 min ago'.",
+    "description": "Cookie state. WHEN is a relative time such as '5 min ago'.",
     "placeholders": {
       "when": {
         "content": "$1",
@@ -297,7 +297,7 @@
   },
   "popupCookiesNext": {
     "message": "prochain envoi $WHEN$",
-    "description": "Next automatic sending; WHEN is a relative time such as 'in 3 hr'.",
+    "description": "Next automatic sending. WHEN is a relative time such as 'in 3 hr'.",
     "placeholders": {
       "when": {
         "content": "$1",

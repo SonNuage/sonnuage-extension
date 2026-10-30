@@ -1,6 +1,6 @@
 const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
 const $ = (id) => document.getElementById(id);
-// www/music/m.youtube.com sont déjà accordés (boutons) ; youtube.com et google.com servent aux cookies de domaine.
+// www/music/m.youtube.com sont déjà accordés (boutons). Les domaines youtube.com et google.com servent aux cookies de domaine.
 const COOKIE_PERMISSION = { permissions: ["cookies"], origins: ["https://youtube.com/*", "https://*.google.com/*"] };
 const locale = chrome.i18n.getUILanguage();
 
@@ -21,7 +21,7 @@ async function stored() {
   return chrome.storage.local.get({ servers: [], defaultServerId: null, cookieHours: 24, cookieState: {} });
 }
 
-/** Modifie (patch) ou retire (null) une instance enregistrée ; sans effet sur une instance pas encore enregistrée. */
+/** Modifie (patch) ou retire (null) une instance enregistrée. Sans effet sur une instance pas encore enregistrée. */
 async function persist(id, patch) {
   const { servers } = await stored();
   const index = servers.findIndex((x) => x.id === id);

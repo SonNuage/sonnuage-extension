@@ -17,7 +17,7 @@
   },
   "msgFailedReason": {
     "message": "Failed: $REASON$",
-    "description": "Message: the import failed; REASON is the server's error (may be in another language).",
+    "description": "Message: the import failed. REASON is the server's error (may be in another language).",
     "placeholders": {
       "reason": {
         "content": "$1",
@@ -27,7 +27,7 @@
   },
   "msgSubscribing": {
     "message": "The server is reading the list, this may take a moment.",
-    "description": "Message while subscribing; reading a long playlist takes time."
+    "description": "Message while subscribing. Reading a long playlist takes time."
   },
   "msgSubscribedExisting": {
     "message": "The existing videos are being added to the queue.",
@@ -55,7 +55,7 @@
   },
   "errUnreachable": {
     "message": "$NAME$: server unreachable.",
-    "description": "Error: network failure; NAME is the instance name.",
+    "description": "Error: network failure. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -65,7 +65,7 @@
   },
   "errKeyRejected": {
     "message": "$NAME$: key rejected, it may have been revoked.",
-    "description": "Error 401; NAME is the instance name.",
+    "description": "Error 401. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -75,7 +75,7 @@
   },
   "errForbidden": {
     "message": "$NAME$: access denied by the server.",
-    "description": "Error 403; NAME is the instance name.",
+    "description": "Error 403. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -89,7 +89,7 @@
   },
   "errServer": {
     "message": "$NAME$: server error ($STATUS$).",
-    "description": "Other HTTP error; NAME is the instance, STATUS the HTTP code.",
+    "description": "Other HTTP error. NAME is the instance, STATUS the HTTP code.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -103,7 +103,7 @@
   },
   "errServerDetail": {
     "message": "$NAME$: $DETAIL$",
-    "description": "HTTP error with a message from the server (often in French); NAME is the instance.",
+    "description": "HTTP error with a message from the server (often in French). NAME is the instance.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -124,7 +124,7 @@
     "description": "Error: the browser has no youtube.com cookie."
   },
   "optionsTitle": {
-    "message": "SonNuage – extension settings",
+    "message": "SonNuage extension settings",
     "description": "Title of the settings page."
   },
   "optionsIntro": {
@@ -185,7 +185,7 @@
   },
   "confirmRemove": {
     "message": "Remove “$NAME$” from the extension? The key stays valid on the server until it is revoked there.",
-    "description": "Confirmation; NAME is the instance name.",
+    "description": "Confirmation. NAME is the instance name.",
     "placeholders": {
       "name": {
         "content": "$1",
@@ -223,7 +223,7 @@
   },
   "cookiesLastSent": {
     "message": "Cookies last sent on $DATE$.",
-    "description": "Cookie state; DATE is a localized date and time.",
+    "description": "Cookie state. DATE is a localized date and time.",
     "placeholders": {
       "date": {
         "content": "$1",
@@ -233,7 +233,7 @@
   },
   "cookiesLastError": {
     "message": "Last send failed: $ERROR$",
-    "description": "Cookie state; ERROR is the error message.",
+    "description": "Cookie state. ERROR is the error message.",
     "placeholders": {
       "error": {
         "content": "$1",
@@ -287,7 +287,7 @@
   },
   "popupCookiesSent": {
     "message": "Cookies sent $WHEN$",
-    "description": "Cookie state; WHEN is a relative time such as '5 min ago'.",
+    "description": "Cookie state. WHEN is a relative time such as '5 min ago'.",
     "placeholders": {
       "when": {
         "content": "$1",
@@ -297,7 +297,7 @@
   },
   "popupCookiesNext": {
     "message": "next $WHEN$",
-    "description": "Next automatic sending; WHEN is a relative time such as 'in 3 hr'.",
+    "description": "Next automatic sending. WHEN is a relative time such as 'in 3 hr'.",
     "placeholders": {
       "when": {
         "content": "$1",
