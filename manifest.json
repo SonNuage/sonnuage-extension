@@ -9,7 +9,7 @@
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
-  "version": "1.2.0",
+  "version": "0.0.0",
   "permissions": ["storage", "alarms", "activeTab", "scripting"],
   "optional_permissions": ["cookies"],
   "host_permissions": [

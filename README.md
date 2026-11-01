@@ -1,6 +1,6 @@
 # SonNuage : extension de navigateur
 
-Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [SonNuage](https://git.pmjb.org/pmj.bailly/sonnuage). Un clic sur
+Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [SonNuage](https://git.pmjb.org/sonnuage/sonnuage). Un clic sur
 son icône, dans la barre d'outils, ouvre un menu qui agit sur l'onglet YouTube / YouTube Music affiché, sans rien
 ajouter dans les pages de YouTube :
 
@@ -58,9 +58,27 @@ service) pour les chemins `/api/admin/youtube/*` et `/api/extension/*`.
 
 Pas d'étape de build : les fichiers à la racine sont l'extension. [.gitlab-ci.yml](.gitlab-ci.yml) vérifie la
 syntaxe des scripts et des JSON, contrôle que les clés de traduction sont les mêmes dans toutes les langues, puis
-produit `dist/sonnuage-extension-X.Y.Z.zip` (version lue dans `manifest.json`). Sur un tag `vX.Y.Z` (qui doit
-correspondre à la version du manifeste), le zip va dans le registre de paquets génériques et une release GitLab
-est créée.
+produit `dist/sonnuage-extension-X.Y.Z.zip`. Le manifeste garde la version `0.0.0` : sur un tag `vX.Y.Z`, la CI y
+écrit la version du tag, puis joint le zip à la release (registre de paquets génériques). Le tag `v0.0.0` marque le
+point de départ des versions : la première version publiée est la 0.1.0, en attendant la signature de l'extension.
+
+### Versions
+
+Les versions sont publiées par [semantic-release](https://semantic-release.gitbook.io/) ([.releaserc.json](.releaserc.json)),
+d'après les messages de commit au format [Conventional Commits](https://www.conventionalcommits.org/fr/) :
+`fix: …` donne un correctif (1.0.1), `feat: …` une version mineure (1.1.0), `feat!: …` ou un pied de page
+`BREAKING CHANGE:` une version majeure (2.0.0). `docs`, `chore`, `ci`, `refactor`, `test` ne publient rien.
+Sur `main`, le job `semantic-release` crée le tag `vX.Y.Z` et la release GitLab avec ses notes. Le pipeline du
+tag publie ensuite la version. Il utilise `GITLAB_TOKEN`, jeton du groupe `sonnuage` (variable masquée et protégée,
+tags `v*` protégés).
 
 Sur GitHub, [.github/workflows/ci.yml](.github/workflows/ci.yml) fait les mêmes vérifications, produit le même zip
 et le joint à une release sur les tags `vX.Y.Z`.
+
+## Licence
+
+SonNuage est un logiciel libre sous licence [GNU AGPL v3.0 ou ultérieure](LICENSE) : chacun peut l'utiliser,
+l'étudier, le modifier et le redistribuer. Une version modifiée, y compris proposée comme service en ligne, doit
+publier son code source sous la même licence.
+
+Copyright © 2026 pmj.bailly et les contributeurs de SonNuage.
