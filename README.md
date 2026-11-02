@@ -1,6 +1,6 @@
 # SonNuage : extension de navigateur
 
-Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [SonNuage](https://git.pmjb.org/sonnuage/sonnuage). Un clic sur
+Extension Manifest V3 (Chrome, Edge, Firefox 128+) pour [SonNuage](https://github.com/SonNuage/sonnuage). Un clic sur
 son icône, dans la barre d'outils, ouvre un menu qui agit sur l'onglet YouTube / YouTube Music affiché, sans rien
 ajouter dans les pages de YouTube :
 
