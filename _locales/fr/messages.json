@@ -45,6 +45,10 @@
     "message": "Importer aussi les vidéos déjà publiées",
     "description": "Checkbox in the subscription options."
   },
+  "errWorkerStopped": {
+    "message": "L'extension n'a pas obtenu de réponse à temps. Réessayez ; si l'action a démarré côté serveur, elle se poursuit.",
+    "description": "Error: the background service worker was stopped before answering."
+  },
   "errNoResponse": {
     "message": "Pas de réponse de l'extension.",
     "description": "Error: the background script did not answer."

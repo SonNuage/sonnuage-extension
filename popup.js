@@ -38,7 +38,14 @@ function h(tag, props = {}, ...children) {
 }
 
 async function send(message) {
-  const r = await chrome.runtime.sendMessage({ ...message, serverId });
+  let r;
+  try {
+    r = await chrome.runtime.sendMessage({ ...message, serverId });
+  } catch (e) {
+    // « Receiving end does not exist » : le service worker a été arrêté par Chrome pendant une requête trop longue.
+    if (/receiving end|message port closed/i.test(e?.message ?? "")) throw new Error(t("errWorkerStopped"));
+    throw e;
+  }
   if (!r) throw new Error(t("errNoResponse"));
   if (!r.ok) throw Object.assign(new Error(r.error), { status: r.status, code: r.code });
   return r.data;
