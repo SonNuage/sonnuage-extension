@@ -8,6 +8,8 @@
 //   cookieState     { [id]: { at, error } } dernier envoi par instance (séparé de servers : écrit ici, lu par les options)
 
 const COOKIE_ALARM = "sonnuage-cookies";
+// Vidéo publique quelconque : le test de connexion demande son état, ce que toute clé d'extension peut lire.
+const PROBE_VIDEO_ID = "dQw4w9WgXcQ";
 const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
 
 class SonNuageError extends Error {
@@ -182,7 +184,7 @@ const handlers = {
   subscribe: async ({ serverId, url, isAlbum, importExisting }) =>
     call(await server(serverId), "POST", "/api/admin/youtube/subscriptions", { url, isAlbum: !!isAlbum, importExisting: !!importExisting }),
   uploadCookies,
-  test: async ({ serverId }) => call(await server(serverId), "GET", "/api/extension/status?videoId=dQw4w9WgXcQ"),
+  test: async ({ serverId }) => call(await server(serverId), "GET", `/api/extension/status?${q({ videoId: PROBE_VIDEO_ID })}`),
   openOptions: () => chrome.runtime.openOptionsPage(),
   migrate,
 };

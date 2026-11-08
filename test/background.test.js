@@ -53,6 +53,12 @@ test("status : clé dans l'en-tête, sans cookies du navigateur, nom de l'instan
   assert.equal(req.credentials, "omit");
 });
 
+test("test : demande l'état d'une vidéo, ce que permet toute clé d'extension", async () => {
+  const bg = loadBackground({ storage: configured() });
+  await bg.send({ type: "test" });
+  assert.equal(bg.requests[0].url, "https://music.example.org/api/extension/status?videoId=dQw4w9WgXcQ");
+});
+
 test("adresse d'instance avec chemin : conservée devant /api", async () => {
   const bg = loadBackground({ storage: configured() });
   await bg.send({ type: "status", serverId: "work", url: "https://www.youtube.com/@a" });
