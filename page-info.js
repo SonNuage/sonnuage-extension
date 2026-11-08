@@ -30,7 +30,7 @@
     } catch {
       return null;
     }
-    const host = u.hostname.toLowerCase();
+    const host = u.hostname; // déjà en minuscules (URL)
     if (u.protocol !== "https:" && u.protocol !== "http:") return null;
     if (!HOSTS.has(host)) return null;
     const music = host === "music.youtube.com";
