@@ -87,6 +87,16 @@
       }
     }
   },
+  "errNotSonNuage": {
+    "message": "$NAME$: the answer is not from SonNuage. Check the address, or a login page (Cloudflare Access…) in front of the server.",
+    "description": "HTTP 200 whose body is not JSON (login page or another site at that address). NAME is the instance name.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Home"
+      }
+    }
+  },
   "errThrottled": {
     "message": "YouTube is limiting requests, try again later.",
     "description": "Error 429: YouTube refused the server's requests."

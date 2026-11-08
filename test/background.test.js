@@ -108,6 +108,11 @@ test("autre erreur sans détail : code HTTP", async () => {
   assert.equal((await errorFor(() => reply(502))).error, "errServer|Maison|502");
 });
 
+test("200 qui n'est pas du JSON (page de connexion devant le serveur) : message clair", async () => {
+  const r = await errorFor(() => reply(200, "<!doctype html><title>Sign in</title>"));
+  assert.deepEqual(r, { ok: false, error: "errNotSonNuage|Maison", status: 200, code: null });
+});
+
 // ---------- Import d'une vidéo ----------
 
 const ENTRY = { videoId: "dQw4w9WgXcQ", title: "Titre exact", channel: "Chaîne", durationSeconds: 212, thumbnailUrl: "t.jpg", importStatus: null };

@@ -59,7 +59,12 @@ async function call(target, method, path, body) {
   }
   if (response.ok) {
     const text = await response.text();
-    return text ? JSON.parse(text) : null;
+    try {
+      return text ? JSON.parse(text) : null;
+    } catch {
+      // 200 en HTML : page de connexion (Cloudflare Access, SSO) ou autre site à cette adresse.
+      throw new SonNuageError(t("errNotSonNuage", target.name), response.status);
+    }
   }
   let detail = null;
   try {

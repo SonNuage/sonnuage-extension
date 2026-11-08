@@ -87,6 +87,16 @@
       }
     }
   },
+  "errNotSonNuage": {
+    "message": "$NAME$ : la réponse ne vient pas de SonNuage. Vérifiez l'adresse, ou une page de connexion (Cloudflare Access…) devant le serveur.",
+    "description": "HTTP 200 whose body is not JSON (login page or another site at that address). NAME is the instance name.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "Home"
+      }
+    }
+  },
   "errThrottled": {
     "message": "YouTube limite les requêtes, réessayez plus tard.",
     "description": "Error 429: YouTube refused the server's requests."
