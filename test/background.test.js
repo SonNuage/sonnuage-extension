@@ -290,3 +290,10 @@ test("type de message inconnu : ignoré", async () => {
   assert.equal(await bg.send({ type: "nope" }), undefined);
   assert.equal(await bg.send(null), undefined);
 });
+
+test("nom hérité d'Object (toString, constructor…) : pas un type de message", async () => {
+  const bg = loadBackground({ storage: configured() });
+  for (const type of ["toString", "constructor", "hasOwnProperty", "__proto__"]) {
+    assert.equal(await bg.send({ type }), undefined, type);
+  }
+});

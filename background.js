@@ -190,8 +190,9 @@ const handlers = {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Seuls nos propres scripts parlent au service worker.
   if (sender.id !== chrome.runtime.id) return false;
-  const handler = handlers[message?.type];
-  if (!handler) return false;
+  const type = message?.type;
+  if (typeof type !== "string" || !Object.hasOwn(handlers, type)) return false;
+  const handler = handlers[type];
   Promise.resolve()
     .then(() => handler(message))
     .then(
