@@ -122,13 +122,16 @@ async function cookiesText() {
   const all = [];
   for (const domain of ["youtube.com", "google.com"]) all.push(...(await chrome.cookies.getAll({ domain })));
   if (!all.some((c) => c.domain.endsWith("youtube.com"))) throw new SonNuageError(t("errNoYoutubeCookies"));
-  const lines = ["# Netscape HTTP Cookie File", "# SonNuage browser extension", ""];
-  for (const c of all) {
-    const domain = (c.httpOnly ? "#HttpOnly_" : "") + (c.hostOnly ? c.domain.replace(/^\./, "") : c.domain.startsWith(".") ? c.domain : "." + c.domain);
-    const expiry = c.session || !c.expirationDate ? 0 : Math.floor(c.expirationDate);
-    lines.push([domain, c.hostOnly ? "FALSE" : "TRUE", c.path, c.secure ? "TRUE" : "FALSE", expiry, c.name, c.value].join("\t"));
-  }
-  return lines.join("\n") + "\n";
+  return ["# Netscape HTTP Cookie File", "# SonNuage browser extension", "", ...all.map(netscapeLine)].join("\n") + "\n";
+}
+
+/** Ligne du format Netscape (celui de yt-dlp) : domaine, sous-domaines, chemin, https, expiration, nom, valeur. */
+function netscapeLine(c) {
+  // hostOnly : ce seul hôte, sans point ; sinon domaine et sous-domaines, avec le point de tête.
+  const host = c.hostOnly ? c.domain.replace(/^\./, "") : "." + c.domain.replace(/^\./, "");
+  const expiry = c.session || !c.expirationDate ? 0 : Math.floor(c.expirationDate);
+  const flag = (b) => (b ? "TRUE" : "FALSE");
+  return [(c.httpOnly ? "#HttpOnly_" : "") + host, flag(!c.hostOnly), c.path, flag(c.secure), expiry, c.name, c.value].join("\t");
 }
 
 async function recordCookieState(id, state) {
