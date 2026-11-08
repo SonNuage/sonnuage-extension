@@ -207,6 +207,23 @@ function videoCard(video) {
   return card;
 }
 
+// ---------- Abonnements (playlist, album, chaîne) ----------
+
+/** Déjà suivie : onSubscribed(). Sinon le bouton d'abonnement devient utilisable. */
+async function loadSubscription(url, button, msg, onSubscribed) {
+  const gen = generation;
+  try {
+    const status = await send({ type: "status", url });
+    if (gen !== generation) return;
+    if (status.subscribed) onSubscribed();
+    else button.disabled = false;
+  } catch (e) {
+    if (gen === generation) loadError(msg, e);
+  }
+}
+
+const subscribedText = (importExisting) => `${t("popupSubscribed")} ${t(importExisting ? "msgSubscribedExisting" : "msgSubscribedFuture")}`;
+
 // ---------- Playlist / album ----------
 
 function listCard(list) {
@@ -239,17 +256,7 @@ function listCard(list) {
     existing.label.hidden = true;
   }
 
-  (async () => {
-    const gen = generation;
-    try {
-      const status = await send({ type: "status", url: list.url });
-      if (gen !== generation) return;
-      if (status.subscribed) subscribed();
-      else subscribe.disabled = false;
-    } catch (e) {
-      if (gen === generation) loadError(msg, e);
-    }
-  })();
+  loadSubscription(list.url, subscribe, msg, subscribed);
 
   subscribe.addEventListener("click", async () => {
     const gen = generation;
@@ -260,7 +267,7 @@ function listCard(list) {
       await send({ type: "subscribe", url: list.url, isAlbum: album.input.checked, importExisting });
       if (gen !== generation) return;
       subscribed();
-      setMsg(msg, `${t("popupSubscribed")} ${t(importExisting ? "msgSubscribedExisting" : "msgSubscribedFuture")}`, "good");
+      setMsg(msg, subscribedText(importExisting), "good");
     } catch (e) {
       if (gen !== generation) return;
       setMsg(msg, e.message, "bad");
@@ -310,17 +317,7 @@ function channelCard(channel) {
     existing.label.hidden = true;
   }
 
-  (async () => {
-    const gen = generation;
-    try {
-      const status = await send({ type: "status", url: channel.url });
-      if (gen !== generation) return;
-      if (status.subscribed) subscribed();
-      else button.disabled = false;
-    } catch (e) {
-      if (gen === generation) loadError(msg, e);
-    }
-  })();
+  loadSubscription(channel.url, button, msg, subscribed);
 
   button.addEventListener("click", async () => {
     const gen = generation;
@@ -331,7 +328,7 @@ function channelCard(channel) {
       await send({ type: "subscribe", url: channel.url, isAlbum: false, importExisting });
       if (gen !== generation) return;
       subscribed();
-      setMsg(msg, `${t("popupSubscribed")} ${t(importExisting ? "msgSubscribedExisting" : "msgSubscribedFuture")}`, "good");
+      setMsg(msg, subscribedText(importExisting), "good");
     } catch (e) {
       if (gen !== generation) return;
       setMsg(msg, e.message, "bad");
