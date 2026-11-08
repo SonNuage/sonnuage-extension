@@ -14,15 +14,17 @@ async function stored() {
   return chrome.storage.local.get({ servers: [], defaultServerId: null, cookieHours: 24, cookieState: {} });
 }
 
-/** Modifie (patch) ou retire (null) une instance enregistrée. Sans effet sur une instance pas encore enregistrée. */
-async function persist(id, patch) {
+// Sans effet sur une instance pas encore enregistrée (carte ajoutée, jamais sauvegardée).
+async function updateServer(id, patch) {
   const { servers } = await stored();
-  const index = servers.findIndex((x) => x.id === id);
-  if (index < 0) return false;
-  if (patch === null) servers.splice(index, 1);
-  else servers[index] = { ...servers[index], ...patch };
-  await chrome.storage.local.set({ servers });
-  return true;
+  if (!servers.some((x) => x.id === id)) return;
+  await chrome.storage.local.set({ servers: servers.map((x) => (x.id === id ? { ...x, ...patch } : x)) });
+}
+
+async function removeServer(id) {
+  const { servers } = await stored();
+  if (!servers.some((x) => x.id === id)) return;
+  await chrome.storage.local.set({ servers: servers.filter((x) => x.id !== id) });
 }
 
 function normalizeServer(value) {
@@ -77,14 +79,14 @@ function addCard(server, isDefault, cookieState) {
   field("sendCookies").addEventListener("change", () => {
     if (!field("sendCookies").checked) {
       server.sendCookies = false;
-      persist(server.id, { sendCookies: false }).then(releaseCookiePermission);
+      updateServer(server.id, { sendCookies: false }).then(releaseCookiePermission);
       return;
     }
     // La demande de permission doit partir directement du geste de l'utilisateur.
     chrome.permissions.request(COOKIE_PERMISSION).then(async (granted) => {
       field("sendCookies").checked = granted;
       server.sendCookies = granted;
-      if (granted) await persist(server.id, { sendCookies: true });
+      if (granted) await updateServer(server.id, { sendCookies: true });
       else show(status, t("errCookiePermission"), "bad");
     });
   });
@@ -146,7 +148,7 @@ function addCard(server, isDefault, cookieState) {
 
   field("remove").addEventListener("click", async () => {
     if (!confirm(t("confirmRemove", server.name || t("instanceNew")))) return;
-    await persist(server.id, null);
+    await removeServer(server.id);
     const s = await stored();
     if (s.defaultServerId === server.id) await chrome.storage.local.set({ defaultServerId: s.servers[0]?.id ?? null });
     await releaseCookiePermission();
