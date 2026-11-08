@@ -1,5 +1,5 @@
 # Pipeline de l'extension SonNuage
-#  - package : syntaxe JS et JSON, mêmes clés de traduction dans toutes les langues, puis zip de l'extension en
+#  - package : syntaxe JS et JSON, tests (node --test), mêmes clés de traduction dans toutes les langues, puis zip de l'extension en
 #              artefact (dist/sonnuage-extension-X.Y.Z.zip, version du manifeste). Un seul job : un seul démarrage.
 #  - release : sur main, semantic-release choisit la version et crée le tag vX.Y.Z et sa release. Le pipeline du
 #              tag écrit cette version dans le manifeste et joint le zip à la release
@@ -23,6 +23,7 @@ package:
   image: node:22-alpine
   script:
     - for f in *.js; do node --check "$f"; done
+    - node --test test/*.test.js
     - |
       node -e '
         const fs = require("fs");

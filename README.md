@@ -57,7 +57,8 @@ service) pour les chemins `/api/admin/youtube/*` et `/api/extension/*`.
 ## Développement et CI
 
 Pas d'étape de build : les fichiers à la racine sont l'extension. [.gitlab-ci.yml](.gitlab-ci.yml) vérifie la
-syntaxe des scripts et des JSON, contrôle que les clés de traduction sont les mêmes dans toutes les langues, puis
+syntaxe des scripts et des JSON, lance les tests (`node --test test/*.test.js`, sans dépendance : le dossier `test/`
+n'entre pas dans le zip), contrôle que les clés de traduction sont les mêmes dans toutes les langues, puis
 produit `dist/sonnuage-extension-X.Y.Z.zip`. Le manifeste garde la version `0.0.0` : sur un tag `vX.Y.Z`, la CI y
 écrit la version du tag, puis joint le zip à la release (registre de paquets génériques). Le tag `v0.0.0` marque le
 point de départ des versions : la première version publiée est la 0.1.0, en attendant la signature de l'extension.

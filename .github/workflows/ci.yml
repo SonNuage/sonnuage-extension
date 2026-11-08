@@ -1,5 +1,5 @@
 # Pipeline GitHub Actions, équivalent de .gitlab-ci.yml.
-#  - check   : syntaxe JS et JSON, mêmes clés de traduction dans toutes les langues
+#  - check   : syntaxe JS et JSON, tests (node --test), mêmes clés de traduction dans toutes les langues
 #  - package : zip de l'extension en artefact (sonnuage-extension-X.Y.Z.zip). Sur tag vX.Y.Z (créé par semantic-release
 #              sur GitLab, puis recopié par le miroir), la version du tag est écrite dans le manifeste.
 #  - release : sur tag vX.Y.Z, release GitHub avec le zip. v0.0.0 marque seulement le point de départ des versions.
@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: '22'
       - run: for f in *.js; do node --check "$f"; done
+      - run: node --test test/*.test.js
       - run: |
           node -e '
             const fs = require("fs");
