@@ -1,9 +1,7 @@
 // Menu de l'icône SonNuage : instance cible, actions pour l'onglet YouTube actif, envoi des cookies.
 // Toutes les requêtes passent par le service worker (background.js). Ce script ne fait que l'affichage.
+// t, $, locale et translate viennent de ui.js.
 
-const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
-const $ = (id) => document.getElementById(id);
-const locale = chrome.i18n.getUILanguage();
 const COOKIE_ALARM = "sonnuage-cookies"; // même nom que dans background.js
 const PENDING = ["Queued", "Downloading", "Processing"];
 const STATE_CHIPS = {
@@ -23,12 +21,6 @@ let generation = 0; // change avec l'instance choisie : les réponses d'avant so
 let pollTimer = null;
 
 // ---------- Outils ----------
-
-function translate(root) {
-  root.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
-  root.querySelectorAll("[data-i18n-title]").forEach((el) => (el.title = t(el.dataset.i18nTitle)));
-  root.querySelectorAll("[data-i18n-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.i18nAria)));
-}
 
 /** Petit constructeur d'éléments : h("button", { className: "secondary" }, "Texte"). */
 function h(tag, props = {}, ...children) {

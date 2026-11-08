@@ -1,15 +1,8 @@
-const t = (key, ...subs) => chrome.i18n.getMessage(key, subs.map(String));
-const $ = (id) => document.getElementById(id);
+// Page d'options : instances SonNuage et envoi des cookies. t, $, locale et translate viennent de ui.js.
 // www/music/m.youtube.com sont déjà accordés (boutons). Les domaines youtube.com et google.com servent aux cookies de domaine.
 const COOKIE_PERMISSION = { permissions: ["cookies"], origins: ["https://youtube.com/*", "https://*.google.com/*"] };
-const locale = chrome.i18n.getUILanguage();
 
 // ---------- Traduction de la page ----------
-
-function translate(root) {
-  root.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
-  root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => (el.placeholder = t(el.dataset.i18nPlaceholder)));
-}
 
 document.documentElement.lang = locale;
 document.title = t("optionsTitle");
