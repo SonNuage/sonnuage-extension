@@ -1,5 +1,5 @@
 // Page d'options : instances SonNuage et envoi des cookies. t, $, locale et translate viennent de ui.js.
-// www/music/m.youtube.com sont déjà accordés (boutons). Les domaines youtube.com et google.com servent aux cookies de domaine.
+// www/music/m.youtube.com sont déjà accordés (host_permissions du manifeste). youtube.com et *.google.com : cookies de domaine.
 const COOKIE_PERMISSION = { permissions: ["cookies"], origins: ["https://youtube.com/*", "https://*.google.com/*"] };
 
 // ---------- Traduction de la page ----------
