@@ -59,29 +59,35 @@ async function call(target, method, path, body) {
   } catch {
     throw new SonNuageError(t("errUnreachable", target.name), 0, "unreachable");
   }
-  if (response.ok) {
-    const text = await response.text();
-    try {
-      return text ? JSON.parse(text) : null;
-    } catch {
-      // 200 en HTML : page de connexion (Cloudflare Access, SSO) ou autre site à cette adresse.
-      throw new SonNuageError(t("errNotSonNuage", target.name), response.status);
-    }
-  }
-  let detail = null;
+  if (response.ok) return parseBody(target, response);
+  throw new SonNuageError(errorMessage(target.name, response.status, await errorDetail(response)), response.status);
+}
+
+async function parseBody(target, response) {
+  const text = await response.text();
   try {
-    detail = (await response.json()).detail;
+    return text ? JSON.parse(text) : null;
   } catch {
-    // Réponse sans corps JSON (401, page Cloudflare…).
+    // 200 en HTML : page de connexion (Cloudflare Access, SSO) ou autre site à cette adresse.
+    throw new SonNuageError(t("errNotSonNuage", target.name), response.status);
   }
-  const s = response.status;
-  const message =
-    s === 401 ? t("errKeyRejected", target.name)
-    : s === 429 ? t("errThrottled")
-    : detail ? t("errServerDetail", target.name, detail)
-    : s === 403 ? t("errForbidden", target.name)
-    : t("errServer", target.name, s);
-  throw new SonNuageError(message, s);
+}
+
+/** Champ `detail` d'une erreur du serveur (ProblemDetails), ou null. */
+async function errorDetail(response) {
+  try {
+    return (await response.json()).detail ?? null;
+  } catch {
+    return null; // Réponse sans corps JSON (401, page Cloudflare…).
+  }
+}
+
+function errorMessage(name, status, detail) {
+  if (status === 401) return t("errKeyRejected", name);
+  if (status === 429) return t("errThrottled");
+  if (detail) return t("errServerDetail", name, detail);
+  if (status === 403) return t("errForbidden", name);
+  return t("errServer", name, status);
 }
 
 const q = (params) => new URLSearchParams(Object.entries(params).filter(([, v]) => v != null)).toString();
